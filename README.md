@@ -1,2 +1,0 @@
-# thermometer
-Thermometer web page
