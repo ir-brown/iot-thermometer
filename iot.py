@@ -17,7 +17,7 @@ client.configureMQTTOperationTimeout(5)
 client.connect()
 
 for i in range(100):
-    client.publish("testTopic/1", "yeet", 0)
+    client.publish("topic_1", "yeet", 0)
     time.sleep(10)
 
 client.disconnect()
