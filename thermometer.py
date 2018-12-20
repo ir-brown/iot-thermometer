@@ -2,17 +2,15 @@ import os
 import glob
 import time
 import math
-from cachetools import cached, TTLCache
- 
-# Enable One Wire Interface 
+
+# Enable One Wire Interface
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
- 
+
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
-cache = TTLCache(maxsize=1, ttl=300)
- 
+
 def read_sensor():
     lines = ["" for i in range(2)]
     while lines[0].strip()[-3:] != 'YES':
@@ -22,7 +20,6 @@ def read_sensor():
         time.sleep(0.2)
     return lines
 
-@cached(cache)
 def read_temp():
     lines = read_sensor()
     temp_line = lines[1]
@@ -38,5 +35,3 @@ if __name__ == "__main__":
     f = read_temp()
     str = "Temperature - F: {0}".format(f)
     print(str)
-
-    
