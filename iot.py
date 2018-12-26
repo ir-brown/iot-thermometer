@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
                     level=logging.INFO,
                     filename='/home/pi/thermometer/output.txt',
-                    filemode-'w')
+                    filemode='w')
 
 # Static variables
 ca = '/home/pi/aws/root-CA.crt'
