@@ -15,6 +15,7 @@ ca = '/home/pi/aws/root-CA.crt'
 cert = '/home/pi/aws/Bodie.cert.pem'
 priv = '/home/pi/aws/Bodie.private.key'
 topic = 'Temperature'
+current_location = 'Chloe Apartments'
 
 def initBodieClient():
     client = AWSIoTMQTTClient('bodie')
@@ -31,6 +32,7 @@ def pollThermometer():
     data = {}
     data['Temperature'] = thermometer.read_temp()
     data['Datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    data['Location'] = current_location
     json_data = json.dumps(data)
     logging.info('Temperature captured!')
     return json_data
