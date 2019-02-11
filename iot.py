@@ -3,6 +3,7 @@ import time
 import datetime
 import json
 import logging
+import uuid
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s',
@@ -30,6 +31,7 @@ def initBodieClient():
 def pollThermometer():
     logging.info('Polling the thermometer...')
     data = {}
+    data['UUID'] = str(uuid.uuid4());
     data['Temperature'] = thermometer.read_temp()
     data['Datetime'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     data['Location'] = current_location
