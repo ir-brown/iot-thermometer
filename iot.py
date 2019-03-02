@@ -16,7 +16,7 @@ ca = '/home/pi/aws/root-CA.crt'
 cert = '/home/pi/aws/Bodie.cert.pem'
 priv = '/home/pi/aws/Bodie.private.key'
 topic = 'Temperature'
-current_location = 'Chloe Apartments'
+current_location = 'Garden Court Apartments'
 
 def initBodieClient():
     client = AWSIoTMQTTClient('bodie')
