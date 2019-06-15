@@ -5,5 +5,5 @@ app = Flask(__name__)
 
 @app.route("/read")
 def checkTemp():
-    temp = read_temp()
+    temp = thermometer.read_temp()
     return 'Temperature: ' + temp + 'F'
