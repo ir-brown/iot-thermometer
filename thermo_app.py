@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort
 from flask import jsonify
 from boto3.dynamodb.conditions import Key, Attr
 import boto3
@@ -23,7 +23,19 @@ def fetchCurrentTemp():
     )
     response = replace_decimals(response)
 
-    return jsonify(response['Items'])
+    if (len(response['Items']) == 0):
+        abort(500)
+    elif (len(response['Items']) > 1):
+        response = max(response['Items'], key=lambda i : i['Datetime']) # return item with latest Datetime
+    else:
+        response = response['Items']
+
+    return jsonify(response)
+
+
+@app.errorhandler(500)
+def thermometer_read_error(e):
+    return 'Raspberry Pi thermometer has not updated recently', 500
 
 # Stolen with love from garnaat
 def replace_decimals(obj):
